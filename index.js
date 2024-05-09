@@ -7,6 +7,15 @@ const port = 3000
 const Tutor = require('./models/Tutor')
 const Pet = require('./models/Pet')
 
+// Pegar os dados do body
+app.use(express.urlencoded({
+  extended: true
+}))
+app.use(express.json())
+
+// Rota Tutor
+app.use('/tutors', require('./routes/tutors'))
+
 // Rota príncipal
 app.get('/', (req, res) => {
   res.send('Rota conectada com sucesso')
@@ -20,4 +29,3 @@ conn
     console.log('Servidor conectado com sucesso')
     console.log(`Estamos rodando na porta: ${port}`)
   }).catch(err => console.log(err))
-
