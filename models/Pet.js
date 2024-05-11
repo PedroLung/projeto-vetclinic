@@ -16,11 +16,11 @@ const Pet = db.define('Pet', {
     require: true
   },
   weight: {
-    type: DataTypes.DATE,
+    type: DataTypes.FLOAT,
     require: true
   },
   date_of_birth: {
-    type: DataTypes.STRING,
+    type: DataTypes.DATE,
     require: true
   }
 })
