@@ -16,6 +16,9 @@ app.use(express.json())
 // Rota Tutor
 app.use('/tutors', require('./routes/tutors'))
 
+// Rota Pet
+app.use('/pets', require('./routes/pets'))
+
 // Rota príncipal
 app.get('/', (req, res) => {
   res.send('Rota conectada com sucesso')
