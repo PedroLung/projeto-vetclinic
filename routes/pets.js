@@ -56,8 +56,7 @@ router.post('/update/:id', async (req, res) => {
 
 // Rota DELETE
 router.post('/delete/:id', async (req, res) => {
-  const TutorId = req.params.id
-  const id = req.body.id
+  const id = req.params.id
 
   await Pet.destroy({where: {id: id} })
 
