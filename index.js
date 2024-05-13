@@ -17,7 +17,7 @@ app.use(express.json())
 app.use('', require('./routes/tutors'))
 
 // Rota Pet
-app.use('', require('./routes/pets'))
+app.use('/pet', require('./routes/pets'))
 
 // Rota príncipal
 app.get('/', (req, res) => {
