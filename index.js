@@ -14,10 +14,10 @@ app.use(express.urlencoded({
 app.use(express.json())
 
 // Rota Tutor
-app.use('/tutors', require('./routes/tutors'))
+app.use('', require('./routes/tutors'))
 
 // Rota Pet
-app.use('/pets', require('./routes/pets'))
+app.use('', require('./routes/pets'))
 
 // Rota príncipal
 app.get('/', (req, res) => {

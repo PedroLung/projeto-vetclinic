@@ -5,7 +5,7 @@ const Pet = require('../models/Pet')
 
 //Rota Get
 // Ver todos os Tutores cadastrados
-router.get('/view', async (req, res) => {
+router.get('/tutors', async (req, res) => {
 
   const tutor = await Tutor.findAll({include: Pet})
   console.log(tutor)
@@ -13,7 +13,7 @@ router.get('/view', async (req, res) => {
 })
 
 // Ver Tutores individuais
-router.get('/view/:id', async (req, res) => {
+router.get('/tutors/:id', async (req, res) => {
   const id = req.params.id
 
   const tutor = await Tutor.findOne({include: Pet, where: {id: id} })
@@ -22,7 +22,7 @@ router.get('/view/:id', async (req, res) => {
 })
 
 //Rota Post
-router.post('/create', async (req, res) => {
+router.post('/tutor', async (req, res) => {
   const name = req.body.name
   const phone = req.body.phone
   const email = req.body.email
@@ -43,7 +43,7 @@ router.post('/create', async (req, res) => {
 })
 
 // Rota PUT
-router.put('/update/:id', async (req, res) => {
+router.put('/tutor/:id', async (req, res) => {
   const id = req.params.id
   const name = req.body.name
   const phone = req.body.phone
@@ -64,7 +64,7 @@ router.put('/update/:id', async (req, res) => {
 })
 
 // Rota Patch
-router.patch('/update/patch/:id', async (req, res) => {
+router.patch('/tutor/patch/:id', async (req, res) => {
   const id = req.params.id
 
   let tutor = await Tutor.findOne({where: {id: id} })
@@ -86,7 +86,7 @@ router.patch('/update/patch/:id', async (req, res) => {
 })
 
 // Rota DELETE
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/tutor/:id', async (req, res) => {
   const id = req.params.id
 
   await Tutor.destroy({where: {id: id} })
