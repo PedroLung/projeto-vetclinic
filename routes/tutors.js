@@ -43,7 +43,7 @@ router.post('/create', async (req, res) => {
 })
 
 // Rota PUT
-router.post('/update/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
   const id = req.params.id
   const name = req.body.name
   const phone = req.body.phone
@@ -63,8 +63,30 @@ router.post('/update/:id', async (req, res) => {
   res.send(tutor)
 })
 
+// Rota Patch
+router.patch('/update/patch/:id', async (req, res) => {
+  const id = req.params.id
+
+  let tutor = await Tutor.findOne({where: {id: id} })
+
+  const data = ['name', 'phone', 'email', 'zip_code']
+  data.forEach((dado) => {
+    if (req.body[dado]) {
+      tutor[dado] = req.body[dado]
+    }
+  })
+  // Verificação de Data válida
+  let dateOfBirth = new Date(req.body.date_of_birth)
+  if (!isNaN(dateOfBirth.getTime())) {
+    tutor.date_of_birth = dateOfBirth
+  }
+
+  await tutor.save()
+  res.send(tutor)
+})
+
 // Rota DELETE
-router.post('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
   const id = req.params.id
 
   await Tutor.destroy({where: {id: id} })

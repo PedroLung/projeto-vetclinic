@@ -33,7 +33,7 @@ router.get('/view', async (req, res) => {
 })
 
 // Rota PUT
-router.post('/update/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
   const id = req.params.id
   const name = req.body.name
   const species = req.body.species
@@ -54,8 +54,30 @@ router.post('/update/:id', async (req, res) => {
   res.send(pet)
 })
 
+// Rota Patch
+router.patch('/update/patch/:id', async (req, res) => {
+  const id = req.params.id
+
+  let pet = await Pet.findOne({where: {id: id} })
+
+  const data = ['name', 'species', 'carry', 'weight']
+  data.forEach((dado) => {
+    if (req.body[dado]) {
+      pet[dado] = req.body[dado]
+    }
+  })
+  // Verificação de Data válida
+  let dateOfBirth = new Date(req.body.date_of_birth)
+  if (!isNaN(dateOfBirth.getTime())) {
+    pet.date_of_birth = dateOfBirth
+  }
+
+  await pet.save()
+  res.send(pet)
+})
+
 // Rota DELETE
-router.post('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
   const id = req.params.id
 
   await Pet.destroy({where: {id: id} })
